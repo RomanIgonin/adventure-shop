@@ -9,7 +9,7 @@ interface Article {
   cover: string;
 }
 
-function Articles() {
+function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ function Articles() {
   );
 }
 
-export default Articles;
+export default ArticlesPage;
