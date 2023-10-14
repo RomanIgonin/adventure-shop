@@ -11,6 +11,7 @@ function App() {
       <img
         src={require('@img/header-bg.jpg')}
         style={{ width: '100%', height: 100, objectFit: 'cover' }}
+        alt={'header img'}
       />
       <BrowserRouter>
         <Routes>
