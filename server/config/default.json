@@ -1,3 +1,4 @@
 {
-  "serverPort": 8800
+  "serverPort": 8800,
+  "secretKey": "key-19.4rcOw94,2-1eqscCKDsA"
 }
