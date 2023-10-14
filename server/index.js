@@ -47,7 +47,7 @@ app.post("/articles", async(req, res) => {
     req.body.cover,
   ];
 
-  await query(q, [values], (error, data) => {
+  await query(q, [values], (error) => {
     if (error) res.json(error);
     else res.json("Article has been created successfully");
   });

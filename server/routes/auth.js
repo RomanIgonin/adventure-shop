@@ -51,7 +51,7 @@ router.post(
           const hashPassword = await bcrypt.hash(password, 8);
           const values = [email, hashPassword];
 
-          await query(qCreate, [values], (error, data) => {
+          await query(qCreate, [values], (error) => {
             if (error) {
               return res.status(400).json({ error: error });
             } else {
