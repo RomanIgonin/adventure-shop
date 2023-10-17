@@ -1,7 +1,32 @@
+/*@font-face {*/
+/*    font-family: 'Ubuntu';*/
+/*    src: url('./assets/fonts/Ubuntu-Light.woff2') format('woff2'),*/
+/*    url('./assets/fonts/Ubuntu-Light.woff') format('woff');*/
+/*    font-weight: 300;*/
+/*    font-display: swap;*/
+/*    font-style: normal;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Ubuntu';*/
+/*    src: url('./assets/fonts/Ubuntu-Regular.woff2') format('woff2'),*/
+/*    url('./assets/fonts/Ubuntu-Regular.woff') format('woff');*/
+/*    font-weight: 400;*/
+/*    font-display: swap;*/
+/*    font-style: normal;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Ubuntu';*/
+/*    src: url('./assets/fonts/Ubuntu-Bold.woff2') format('woff2'),*/
+/*    url('./assets/fonts/Ubuntu-Bold.woff') format('woff');*/
+/*    font-weight: 700;*/
+/*    font-display: swap;*/
+/*    font-style: normal;*/
+/*}*/
 @font-face {
     font-family: 'Ubuntu';
-    src: url('./assets/fonts/Ubuntu-Light.woff2') format('woff2'),
-    url('./assets/fonts/Ubuntu-Light.woff') format('woff');
+    src: url('./assets/fonts/Ubuntu-Light.ttf') format('truetype');
     font-weight: 300;
     font-display: swap;
     font-style: normal;
@@ -9,8 +34,7 @@
 
 @font-face {
     font-family: 'Ubuntu';
-    src: url('./assets/fonts/Ubuntu-Regular.woff2') format('woff2'),
-    url('./assets/fonts/Ubuntu-Regular.woff') format('woff');
+    src: url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');
     font-weight: 400;
     font-display: swap;
     font-style: normal;
@@ -18,8 +42,7 @@
 
 @font-face {
     font-family: 'Ubuntu';
-    src: url('./assets/fonts/Ubuntu-Bold.woff2') format('woff2'),
-    url('./assets/fonts/Ubuntu-Bold.woff') format('woff');
+    src: url('./assets/fonts/Ubuntu-Bold.ttf') format('truetype');
     font-weight: 700;
     font-display: swap;
     font-style: normal;
