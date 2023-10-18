@@ -1,22 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import * as S from '@src/modules/navbar/ui/styles';
-import UDButton from '@src/modules/ud-ui/ud-button';
+import UDNavButton from '@src/modules/ud-ui/ud-nav-button';
+import Header from '@src/modules/home/ui/components/header';
 
 function Navbar() {
   const navigation = useNavigate();
 
+  const [activeBtn, setActiveBtn] = useState<string>('ГЛАВНАЯ');
+
+  const onClickBtn = (btnName: string, route: string) => {
+    setActiveBtn(btnName);
+    navigation(route);
+  };
+
   return (
     <S.Container>
+      <Header activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
       <S.NavbarWrap>
         <S.NavbarLeft>
-          <UDButton title={'Главная'} marg={20} onClick={() => navigation('/home')} />
-          <UDButton title={'Статьи'} marg={20} onClick={() => navigation('/articles')} />
-          <UDButton title={'Гостевая книга'} marg={20} onClick={() => navigation('/guests')} />
+          <UDNavButton
+            title={'ОДЕЖДА'}
+            color={'light'}
+            isActive={activeBtn === 'ОДЕЖДА'}
+            onClick={() => onClickBtn('ОДЕЖДА', '/catalog')}
+          />
+          <UDNavButton
+            title={'ОБУВЬ'}
+            color={'light'}
+            isActive={activeBtn === 'ОБУВЬ'}
+            onClick={() => onClickBtn('ОБУВЬ', '/catalog')}
+            style={{ marginLeft: 50 }}
+          />
+          <UDNavButton
+            title={'ПАЛАТКИ'}
+            color={'light'}
+            isActive={activeBtn === 'ПАЛАТКИ'}
+            onClick={() => onClickBtn('ПАЛАТКИ', '/catalog')}
+            style={{ marginLeft: 50 }}
+          />
+          <UDNavButton
+            title={'СПАЛЬНИКИ'}
+            color={'light'}
+            isActive={activeBtn === 'СПАЛЬНИКИ'}
+            onClick={() => onClickBtn('СПАЛЬНИКИ', '/catalog')}
+            style={{ marginLeft: 50 }}
+          />
+          <UDNavButton
+            title={'РЮКЗАКИ'}
+            color={'light'}
+            isActive={activeBtn === 'РЮКЗАКИ'}
+            onClick={() => onClickBtn('РЮКЗАКИ', '/catalog')}
+            style={{ marginLeft: 50 }}
+          />
         </S.NavbarLeft>
         <S.NavbarRight>
-          <UDButton title={'Вход'} marg={20} onClick={() => navigation('/login')} />
-          <UDButton title={'Регистрация'} marg={20} onClick={() => navigation('/registration')} />
+          <UDNavButton
+            title={'СТАТЬИ'}
+            color={'light'}
+            isActive={activeBtn === 'СТАТЬИ'}
+            onClick={() => onClickBtn('СТАТЬИ', '/articles')}
+          />
+          <UDNavButton
+            title={'ГОСТЕВАЯ КНИГА'}
+            color={'light'}
+            isActive={activeBtn === 'ГОСТЕВАЯ КНИГА'}
+            onClick={() => onClickBtn('ГОСТЕВАЯ КНИГА', '/guests')}
+            style={{ marginLeft: 50 }}
+          />
         </S.NavbarRight>
       </S.NavbarWrap>
 

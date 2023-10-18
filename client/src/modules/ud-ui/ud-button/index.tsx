@@ -1,35 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as S from '@src/modules/ud-ui/ud-button/styles';
+import UDText from '@src/modules/ud-ui/ud-text';
 
 interface Props {
   title: string;
-  marg?: number;
   onClick: () => void;
+  style?: React.CSSProperties;
 }
 
 const UDButton = (props: Props) => {
-  const { title, onClick, marg = 0 } = props;
+  const { title, onClick, style = {} } = props;
 
   return (
-    <ButtonWrap marg={marg}>
-      <Button onClick={onClick}>{title}</Button>
-    </ButtonWrap>
+    <S.Button onClick={onClick} style={style}>
+      <UDText title={title} weight={700} color={'light'} />
+    </S.Button>
   );
 };
 
 export default UDButton;
-
-interface ButtonProps {
-  marg: number;
-}
-const ButtonWrap = styled.button<ButtonProps>`
-  height: 40px;
-  width: 100px;
-  border: 2px solid;
-  border-radius: 10px;
-  margin: ${props => props.marg + 'px'};
-`;
-
-const Button = styled.div`
-  font-size: 14px;
-`;

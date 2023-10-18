@@ -1,19 +1,49 @@
 import React from 'react';
+import * as S from '@src/modules/ud-ui/ud-input/styles';
+import UDText, { ColorType } from '@src/modules/ud-ui/ud-text';
+import { RegisterOptions, useFormContext } from 'react-hook-form';
 
-type InputType = 'email' | 'password';
+type InputType = 'email' | 'password' | 'text';
 
 interface Props {
+  name: string;
   type: InputType;
   placeholder: string;
+  validation: RegisterOptions;
+  errMessage: any;
+  color?: ColorType;
+  style?: React.CSSProperties;
 }
 
 const UDInput = (props: Props) => {
-  const { type, placeholder } = props;
+  const { name, type, placeholder, validation, errMessage, color = 'dark', style = {} } = props;
+
+  const { register } = useFormContext();
 
   return (
-    <div>
-      <input type={type} placeholder={placeholder} />
-    </div>
+    <S.InputWrap>
+      {errMessage && (
+        <S.Error>
+          <UDText title={errMessage} size={16} color={'red'} />
+        </S.Error>
+      )}
+      <S.Input
+        id={name}
+        type={type}
+        placeholder={placeholder}
+        color={color}
+        style={style}
+        {...register(name, validation)}
+      />
+      <style>
+        {`
+          ::placeholder { 
+            color: #747474;
+            font-weight: 300;
+          }
+        `}
+      </style>
+    </S.InputWrap>
   );
 };
 
