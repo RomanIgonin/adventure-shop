@@ -4,10 +4,11 @@ import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
 import config from "config";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
-const router = new Router();
+const authRouter = new Router();
 
-router.get("/users", async (req, res) => {
+authRouter.get("/users", async (req, res) => {
   try {
     const q = `SELECT * FROM users`;
     await query(q, (error, data) => {
@@ -15,17 +16,19 @@ router.get("/users", async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.send({ message: "Error on server (registration)" });
+    res.send({ message: "Error on server (/users)" });
   }
 });
 
-router.post(
+authRouter.post(
   "/registration",
   [
     check("email", "Uncorrected email").isEmail(),
-    check("password", "Password must be longer than 6 symbols").isLength({
-      min: 6,
+    check("password", "Password must be longer than 8 symbols").isLength({
+      min: 8,
     }),
+    check("firstName", "Uncorrected first name").isString(),
+    check("lastName", "Uncorrected last name").isString(),
   ],
   async (req, res) => {
     try {
@@ -33,7 +36,7 @@ router.post(
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Uncorrected request", errors: errors.array() });
       }
-      const { email, password } = req.body;
+      const { email, password, firstName, lastName } = req.body;
 
       const q = `SELECT * FROM users WHERE email = '${email}'`;
 
@@ -43,13 +46,12 @@ router.post(
         const isUserExist = data.length > 0;
         if (isUserExist) {
           return res.status(400).json({
-            status: 400,
             message: `User with email ${email} already exist`,
           });
         } else {
-          const qCreate = "INSERT INTO users (`email`, `password`) VALUES(?)";
+          const qCreate = "INSERT INTO users (`email`, `password`, `firstName`, `lastName`) VALUES(?)";
           const hashPassword = await bcrypt.hash(password, 8);
-          const values = [email, hashPassword];
+          const values = [email, hashPassword, firstName, lastName];
 
           await query(qCreate, [values], (error) => {
             if (error) {
@@ -64,12 +66,12 @@ router.post(
       });
     } catch (e) {
       console.log(e);
-      res.send({ message: "Error on server (api/auth/registration)" });
+      return res.status(400).json({ message: 'Error on server (auth/registration)' });
     }
   },
 );
 
-router.post(
+authRouter.post(
   "/login",
   async (req, res) => {
     try {
@@ -94,14 +96,47 @@ router.post(
           user: {
             id: user.id,
             email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
           }
         });
       });
     } catch (e) {
       console.log(e);
-      res.send({ message: "Error on server (api/auth/login)" });
+      return res.status(400).json({ message: 'Error on server (auth/login)' });
     }
   },
 );
 
-export default router;
+authRouter.get(
+  "/auth", authMiddleware,
+  async (req, res) => {
+    try {
+      const userId = req.user.user.id;
+      const q = `SELECT * FROM users WHERE id = '${userId}'`;
+
+      await query(q, async (error, data) => {
+        if (error) return res.json(error);
+
+        const isUserExist = data.length > 0;
+        const user = isUserExist && data[0];
+
+        const token = await jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: '1h'});
+        return res.json({
+          token,
+          user: {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          }
+        });
+      });
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: 'Error on server (auth/auth)' });
+    }
+  },
+);
+
+export default authRouter;
