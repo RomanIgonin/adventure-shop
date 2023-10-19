@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from '@src/modules/navbar/ui';
 import HomePage from '@src/modules/home/ui';
@@ -8,8 +8,15 @@ import CatalogPage from '@src/modules/catalog/ui';
 import ArticlesPage from '@src/modules/articles/ui';
 import GuestPage from '@src/modules/guests/ui';
 import AuthPage from '@src/modules/auth/ui';
+import authStore from '@src/modules/auth/store';
 
 function App() {
+  const { auth } = authStore;
+
+  useEffect(() => {
+    auth();
+  }, []);
+
   return (
     <StyleSheetManager
       enableVendorPrefixes
