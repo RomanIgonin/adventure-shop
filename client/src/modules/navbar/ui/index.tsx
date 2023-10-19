@@ -3,20 +3,21 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import * as S from '@src/modules/navbar/ui/styles';
 import UDNavButton from '@src/modules/ud-ui/ud-nav-button';
 import Header from '@src/modules/home/ui/components/header';
+import { observer } from 'mobx-react-lite';
+import navBarStore from '@src/modules/navbar/store';
 
 function Navbar() {
   const navigation = useNavigate();
-
-  const [activeBtn, setActiveBtn] = useState<string>('ГЛАВНАЯ');
+  const { activeBtn, changeActiveBtn } = navBarStore;
 
   const onClickBtn = (btnName: string, route: string) => {
-    setActiveBtn(btnName);
+    changeActiveBtn(btnName);
     navigation(route);
   };
 
   return (
     <S.Container>
-      <Header activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
+      <Header />
       <S.NavbarWrap>
         <S.NavbarLeft>
           <UDNavButton
@@ -78,4 +79,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default observer(Navbar);
