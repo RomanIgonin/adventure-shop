@@ -5,14 +5,24 @@ import * as S from '@src/modules/auth/ui/styles';
 import UDText from '@src/modules/ud-ui/ud-text';
 import UDButton from '@src/modules/ud-ui/ud-button';
 import { FormProvider, useForm } from 'react-hook-form';
+import { emailValidator } from '@src/modules/auth/domain/helpers/emailValidator';
+import { nameValidator } from '@src/modules/auth/domain/helpers/nameValidator';
+import authStore from '@src/modules/auth/store';
+import { AuthData } from '@src/modules/auth/domain/interfaces/AuthData';
+import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
+import navBarStore from '@src/modules/navbar/store';
 
 function AuthPage() {
   const [isLogin, setLogin] = useState<boolean>(true);
   const [passType, setPassType] = useState<'password' | 'text'>('password');
 
-  const methods = useForm();
+  const navigation = useNavigate();
+
+  const { changeActiveBtn } = navBarStore;
+
+  const methods = useForm<AuthData>();
   const {
-    register,
     handleSubmit,
     reset,
     formState: { errors },
@@ -24,9 +34,21 @@ function AuthPage() {
   const iconEye =
     passType === 'password' ? require('@img/icon-eye.png') : require('@img/icon-slash-eye.png');
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data);
-    reset();
+  const onSubmit = handleSubmit(async (data: AuthData) => {
+    if (isLogin) {
+      const res = await authStore.login(data);
+      if (res.status === 200) {
+        reset();
+        navigation('/');
+        changeActiveBtn('ГЛАВНАЯ');
+      }
+    } else {
+      const res = await authStore.registration(data);
+      if (res.status === 200) {
+        setLogin(true);
+        reset();
+      }
+    }
   });
 
   const onClickEye = () => {
@@ -43,12 +65,6 @@ function AuthPage() {
     setPassType('password');
   };
 
-  const isValidEmail = (email: string) =>
-    // eslint-disable-next-line no-useless-escape
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-      email,
-    );
-
   return (
     <FormProvider {...methods}>
       <S.Container onSubmit={e => e.preventDefault()} noValidate>
@@ -64,7 +80,7 @@ function AuthPage() {
                 validation={{
                   required: 'Заполните обязательное поле',
                   validate: {
-                    matchPattern: v => isValidEmail(v) || 'Email введен не корректно',
+                    matchPattern: v => emailValidator(v) || 'Email введен не корректно',
                   },
                 }}
                 errMessage={errors.email?.message || ''}
@@ -100,8 +116,7 @@ function AuthPage() {
                     validation={{
                       required: 'Заполните обязательное поле',
                       validate: {
-                        matchPattern: v =>
-                          /^[a-zA-Z0-9_]+$/.test(v) || 'Заполните обязательное поле',
+                        matchPattern: v => nameValidator(v) || 'Используйте только символы',
                       },
                     }}
                     errMessage={errors.firstName?.message || ''}
@@ -116,7 +131,7 @@ function AuthPage() {
                     validation={{
                       required: 'Заполните обязательное поле',
                       validate: {
-                        matchPattern: v => /^[a-zA-Z]+$/.test(v) || 'Используйте только символы',
+                        matchPattern: v => nameValidator(v) || 'Используйте только символы',
                       },
                     }}
                     errMessage={errors.lastName?.message || ''}
@@ -147,4 +162,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default observer(AuthPage);
