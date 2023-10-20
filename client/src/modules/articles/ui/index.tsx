@@ -1,40 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-interface Article {
-  id: number;
-  title: string;
-  introText: string;
-  fullText: string;
-  cover: string;
-}
+import React, { useCallback, useEffect } from 'react';
+import articlesStore from '@src/modules/articles/store';
+import { observer } from 'mobx-react-lite';
+import Footer from '@src/modules/home/ui/components/footer';
+import * as S from '@src/modules/articles/ui/styles';
+import UDText from '@src/modules/ud-ui/ud-text';
+import { useNavigate } from 'react-router-dom';
 
 function ArticlesPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
+  const { articles, getIntroArticles, getFullArticle } = articlesStore;
+
+  const navigation = useNavigate();
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const res = await axios.get('http://localhost:8800/articles');
-        setArticles(res.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchArticles();
+    getIntroArticles();
   }, []);
 
+  const onClickArticle = async (id: string) => {
+    navigation(`/article/${id}`);
+    await getFullArticle(id);
+  };
+
+  const ArticlesList = useCallback(() => {
+    if (articles) {
+      return (
+        <>
+          {articles.map(article => (
+            <S.ArticleWrap key={article.id} onClick={() => onClickArticle(article.id)}>
+              <S.ArticleImg src={article.introImageUrl} alt={article.title} />
+              <S.TextWrap>
+                <S.TopTextWrap>
+                  <S.Title title={article.title} weight={700} size={24} />
+                  <S.IntroText title={article.introText} size={16} style={{ marginTop: 10 }} />
+                </S.TopTextWrap>
+                <S.Date title={article.date} weight={700} size={16} style={{ color: '#9D9D9D' }} />
+                <S.ReadMore>
+                  <UDText title={'Читать далее...'} weight={700} size={16} />
+                </S.ReadMore>
+              </S.TextWrap>
+            </S.ArticleWrap>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <UDText
+          title={'СТАТЕЙ НЕТ'}
+          weight={700}
+          size={32}
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
+        />
+      );
+    }
+  }, [articles]);
+
   return (
-    <div>
-      {articles.map((article: Article) => (
-        <div key={article.id} className={'articles'}>
-          {article.cover && <img src={article.cover} alt="cover" />}
-          <h2 className={'title'}>{article.title}</h2>
-          <p className={'introText'}>{article.introText}</p>
-        </div>
-      ))}
-    </div>
+    <S.Container>
+      <S.ArticlesWrap>
+        <ArticlesList />
+      </S.ArticlesWrap>
+      <Footer />
+    </S.Container>
   );
 }
 
-export default ArticlesPage;
+export default observer(ArticlesPage);
