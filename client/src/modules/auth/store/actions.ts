@@ -36,7 +36,7 @@ export const postLogin = async (data: AuthData) => {
 export const getAuth = async () => {
   try {
     const token = await localStorage.getItem('token');
-    const response = await axios.get(API_URL + `${PREFIX}/auth`, {
+    const response = await axios.get(API_URL + `${PREFIX}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,7 +44,7 @@ export const getAuth = async () => {
     await localStorage.setItem('token', response.data.token);
     return response;
   } catch (e: any) {
-    alert(e.response.data.message);
+    console.log(e.response.data.message);
     await localStorage.removeItem('token');
     return e.response;
   }

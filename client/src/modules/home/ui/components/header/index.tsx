@@ -1,21 +1,19 @@
 import React from 'react';
 import * as S from '@src/modules/home/ui/components/header/styles';
 import UDNavButton from '@src/modules/ud-ui/ud-nav-button';
-import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import navBarStore from '@src/modules/navbar/store';
 import authStore from '@src/modules/auth/store';
 import UDText from '@src/modules/ud-ui/ud-text';
 
-const Header = () => {
-  const navigation = useNavigate();
-  const { activeBtn, changeActiveBtn } = navBarStore;
+interface Props {
+  onClickBtn: (btnName: string, route: string) => void;
+}
+const Header = (props: Props) => {
+  const { activeBtn } = navBarStore;
   const { session, logout } = authStore;
 
-  const onClickBtn = (btnName: string, route: string) => {
-    changeActiveBtn(btnName);
-    navigation(route);
-  };
+  const { onClickBtn } = props;
 
   const SessionBtn = () => {
     if (session) {

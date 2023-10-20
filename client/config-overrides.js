@@ -1,10 +1,10 @@
-const { alias } = require('react-app-rewire-alias');
+import { alias } from 'react-app-rewire-alias';
 
-module.exports = function override(config) {
+export default function override(config) {
   alias({
     '@src': 'src/',
     '@img': 'src/assets/img/',
   })(config);
 
   return config;
-};
+}

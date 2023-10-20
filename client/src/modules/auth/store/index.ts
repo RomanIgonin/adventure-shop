@@ -38,7 +38,6 @@ class AuthStore {
   auth = async () => {
     this.setLoading(true);
     const res = await getAuth();
-    console.log('success', res);
     if (res.data.user) {
       this.setSession(res.data);
     } else {

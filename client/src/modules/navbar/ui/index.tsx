@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import * as S from '@src/modules/navbar/ui/styles';
 import UDNavButton from '@src/modules/ud-ui/ud-nav-button';
@@ -10,14 +10,15 @@ function Navbar() {
   const navigation = useNavigate();
   const { activeBtn, changeActiveBtn } = navBarStore;
 
-  const onClickBtn = (btnName: string, route: string) => {
+  const onClickBtn = async (btnName: string, route: string) => {
     changeActiveBtn(btnName);
     navigation(route);
+    await localStorage.setItem('activeBtn', btnName);
   };
 
   return (
     <S.Container>
-      <Header />
+      <Header onClickBtn={onClickBtn} />
       <S.NavbarWrap>
         <S.NavbarLeft>
           <UDNavButton

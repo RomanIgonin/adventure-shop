@@ -9,13 +9,26 @@ import ArticlesPage from '@src/modules/articles/ui';
 import GuestPage from '@src/modules/guests/ui';
 import AuthPage from '@src/modules/auth/ui';
 import authStore from '@src/modules/auth/store';
+import navBarStore from '@src/modules/navbar/store';
+import UDText from '@src/modules/ud-ui/ud-text';
 
 function App() {
   const { auth } = authStore;
+  const { changeActiveBtn } = navBarStore;
+
+  const errTitle = 'ЗАПРАШИВАЕМОЙ СТРАНИЦЫ НЕ СУЩЕСТВУЕТ';
 
   useEffect(() => {
-    auth();
+    reloadPage();
   }, []);
+
+  const reloadPage = async () => {
+    const activeBtn = await localStorage.getItem('activeBtn');
+    if (activeBtn) {
+      changeActiveBtn(activeBtn);
+    }
+    await auth();
+  };
 
   return (
     <StyleSheetManager
@@ -32,6 +45,17 @@ function App() {
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/guests" element={<GuestPage />} />
           </Route>
+          <Route
+            path="*"
+            element={
+              <UDText
+                title={errTitle}
+                size={32}
+                weight={700}
+                style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </StyleSheetManager>
