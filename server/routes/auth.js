@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
 import config from "config";
-import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const authRouter = new Router();
 
+// todo remove /users
 authRouter.get("/users", async (req, res) => {
   try {
     const q = `SELECT * FROM users`;
@@ -16,7 +16,7 @@ authRouter.get("/users", async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.send({ message: "Error on server (/users)" });
+    res.status(400).json({ message: "Error on server (/users)" });
   }
 });
 
@@ -66,7 +66,7 @@ authRouter.post(
       });
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ message: 'Error on server (auth/registration)' });
+      return res.status(400).json({ message: 'Error on server POST /auth/registration)' });
     }
   },
 );
@@ -103,16 +103,23 @@ authRouter.post(
       });
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ message: 'Error on server (auth/login)' });
+      return res.status(400).json({ message: 'Error on server POST /auth/login)' });
     }
   },
 );
 
-authRouter.get(
-  "/auth", authMiddleware,
-  async (req, res) => {
+authRouter.get("/", async (req, res) => {
     try {
-      const userId = req.user.user.id;
+      if (req.method !== 'OPTIONS') {
+        const token = req.headers.authorization.split(' ')[1];
+        if (!token) {
+          return res.status(401).json({ message: 'Auth error. Token in incorrect.' });
+        }
+        const decodedToken = jwt.verify(token, config.get('secretKey'));
+        req.user = decodedToken;
+      }
+
+      const userId = req.user.id;
       const q = `SELECT * FROM users WHERE id = '${userId}'`;
 
       await query(q, async (error, data) => {
@@ -134,7 +141,7 @@ authRouter.get(
       });
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ message: 'Error on server (auth/auth)' });
+      return res.status(400).json({ message: 'Error on server GET /auth' });
     }
   },
 );
