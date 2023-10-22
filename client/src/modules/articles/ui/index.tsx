@@ -5,6 +5,7 @@ import Footer from '@src/modules/home/ui/components/footer';
 import * as S from '@src/modules/articles/ui/styles';
 import UDText from '@src/modules/ud-ui/ud-text';
 import { useNavigate } from 'react-router-dom';
+import AdvList from '@src/modules/adv/ui';
 
 function ArticlesPage() {
   const { articles, getIntroArticles, getFullArticle } = articlesStore;
@@ -16,14 +17,13 @@ function ArticlesPage() {
   }, []);
 
   const onClickArticle = async (id: string) => {
-    navigation(`/article/${id}`);
-    await getFullArticle(id);
+    navigation(`/articles/${id}`);
   };
 
   const ArticlesList = useCallback(() => {
     if (articles) {
       return (
-        <>
+        <S.ArticlesListWrap>
           {articles.map(article => (
             <S.ArticleWrap key={article.id} onClick={() => onClickArticle(article.id)}>
               <S.ArticleImg src={article.introImageUrl} alt={article.title} />
@@ -39,7 +39,7 @@ function ArticlesPage() {
               </S.TextWrap>
             </S.ArticleWrap>
           ))}
-        </>
+        </S.ArticlesListWrap>
       );
     } else {
       return (
@@ -57,6 +57,10 @@ function ArticlesPage() {
     <S.Container>
       <S.ArticlesWrap>
         <ArticlesList />
+
+        <S.AdvWrap>
+          <AdvList />
+        </S.AdvWrap>
       </S.ArticlesWrap>
       <Footer />
     </S.Container>

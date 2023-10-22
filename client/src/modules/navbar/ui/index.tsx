@@ -13,6 +13,7 @@ function Navbar() {
   const onClickBtn = async (btnName: string, route: string) => {
     changeActiveBtn(btnName);
     navigation(route);
+    window.scrollTo(0, 0);
     await localStorage.setItem('activeBtn', btnName);
   };
 

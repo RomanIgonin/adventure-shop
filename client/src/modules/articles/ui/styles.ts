@@ -3,9 +3,18 @@ import UDText from '@src/modules/ud-ui/ud-text';
 
 export const Container = styled.div``;
 
+export const ArticlesListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 76%;
+`;
+
 export const ArticlesWrap = styled.div`
+  display: flex;
+  flex-direction: row;
   min-height: 1102px;
-  margin-left: 16%;
+  margin-left: 20%;
+  margin-right: 12%;
   margin-bottom: 60px;
 `;
 
@@ -13,7 +22,7 @@ export const ArticleWrap = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 60px;
-  max-width: 50%;
+  max-width: 90%;
 `;
 
 export const ArticleImg = styled.img`
@@ -43,4 +52,9 @@ export const ReadMore = styled.div`
   position: absolute;
   bottom: 16px;
   right: 32px;
+`;
+
+export const AdvWrap = styled.div`
+  width: 20%;
+  margin-top: 60px;
 `;

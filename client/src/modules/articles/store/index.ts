@@ -43,6 +43,8 @@ class ArticlesStore {
     if (this.articles) {
       const index = this.articles.findIndex(item => article.id === item.id);
       this.articles.splice(index, 1, article);
+    } else {
+      this.setArticles([article]);
     }
   };
 
