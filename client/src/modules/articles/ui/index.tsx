@@ -16,7 +16,7 @@ function ArticlesPage() {
     getIntroArticles();
   }, []);
 
-  const onClickArticle = async (id: string) => {
+  const onClickArticle = async (id: number) => {
     navigation(`/articles/${id}`);
   };
 

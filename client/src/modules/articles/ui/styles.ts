@@ -21,7 +21,7 @@ export const ArticlesWrap = styled.div`
 export const ArticleWrap = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 60px;
+  margin-top: 60px;
   max-width: 90%;
 `;
 
