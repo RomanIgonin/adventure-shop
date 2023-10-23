@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.js";
 import articlesRouter from "./routes/articles.js";
 import advRouter from "./routes/adv.js";
 import guestsRouter from "./routes/guests.js";
+import catalogRouter from "./routes/catalog.js";
 
 const app = express();
 const PORT = config.get("serverPort");
@@ -27,6 +28,7 @@ app.use("/auth", authRouter);
 app.use("/articles", articlesRouter);
 app.use("/adv", advRouter);
 app.use("/guests", guestsRouter);
+app.use("/catalog", catalogRouter);
 
 // todo Добавь несуществующий роут
 app.get("/", (req, res) => {
