@@ -2,49 +2,33 @@ import express from "express";
 import config from "config";
 import mysql from "mysql2";
 import cors from "cors";
+import util from 'util';
 import authRouter from "./routes/auth.js";
+import articlesRouter from "./routes/articles.js";
+import advRouter from "./routes/adv.js";
 
 const app = express();
 const PORT = config.get("serverPort");
 
-export const db = mysql.createConnection({
+// todo Наверное нужно спрятать эти данные
+const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "Slipknot300896",
   database: "data",
 });
 
+export const query = util.promisify(db.query).bind(db);
+
 app.use(express.json());
 app.use(cors());
-app.use("/api/auth", authRouter);
+app.use("/auth", authRouter);
+app.use("/articles", articlesRouter);
+app.use("/adv", advRouter);
 
+// todo Добавь несуществующий роут
 app.get("/", (req, res) => {
   res.json("HELLO");
-});
-
-app.get("/articles", (req, res) => {
-  const query = "SELECT * FROM articles";
-
-  db.query(query, (error, data) => {
-    if (error) res.json(error);
-    else res.json(data);
-  });
-});
-
-app.post("/articles", (req, res) => {
-  const query =
-    "INSERT INTO articles (`title`, `introText`, `fullText`, `cover`) VALUES(?)";
-  const values = [
-    req.body.title,
-    req.body.introText,
-    req.body.fullText,
-    req.body.cover,
-  ];
-
-  db.query(query, [values], (error, data) => {
-    if (error) res.json(error);
-    else res.json("Article has been created successfully");
-  });
 });
 
 const start = async () => {
