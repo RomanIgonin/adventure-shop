@@ -6,6 +6,7 @@ import * as S from '@src/modules/guests/ui/components/addGuestForm/styles';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { GuestData } from '@src/modules/guests/domain/interfaces/GuestData';
+import guestsStore from '@src/modules/guests/store';
 
 function AddGuestForm() {
   const methods = useForm<GuestData>();
@@ -16,7 +17,8 @@ function AddGuestForm() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data: GuestData) => {
-    // reset();
+    await guestsStore.createGuest(data);
+    reset();
   });
 
   return (

@@ -5,9 +5,10 @@ import * as S from '@src/modules/guests/ui/styles';
 import UDText from '@src/modules/ud-ui/ud-text';
 import Footer from '@src/modules/home/ui/components/footer';
 import AddGuestForm from '@src/modules/guests/ui/components/addGuestForm';
+import { observer } from 'mobx-react-lite';
 
 function GuestPage() {
-  const { guests, getGuests, postGuest } = guestsStore;
+  const { guests, getGuests } = guestsStore;
 
   useEffect(() => {
     getGuests();
@@ -50,4 +51,4 @@ function GuestPage() {
   }
 }
 
-export default GuestPage;
+export default observer(GuestPage);
