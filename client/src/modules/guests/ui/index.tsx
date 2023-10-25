@@ -14,41 +14,41 @@ function GuestPage() {
     getGuests();
   }, []);
 
-  if (guests) {
-    return (
-      <S.Container>
-        <S.BodyWrap>
-          <AddGuestForm />
+  return (
+    <S.Container>
+      <S.BodyWrap>
+        {guests ? (
+          <>
+            <AddGuestForm />
 
-          <S.GuestsList>
-            {guests.map(item => {
-              return (
-                <S.GuestWrap key={item.id}>
-                  <S.GuestName title={item.name} weight={700} />
-                  <S.GuestComment title={item.comment} size={16} style={{ marginTop: 6 }} />
-                </S.GuestWrap>
-              );
-            })}
-          </S.GuestsList>
+            <S.GuestsList>
+              {guests.map(item => {
+                return (
+                  <S.GuestWrap key={item.id}>
+                    <S.GuestName title={item.name} weight={700} />
+                    <S.GuestComment title={item.comment} size={16} style={{ marginTop: 6 }} />
+                  </S.GuestWrap>
+                );
+              })}
+            </S.GuestsList>
 
-          <S.AdvWrap>
-            <AdvList />
-          </S.AdvWrap>
-        </S.BodyWrap>
+            <S.AdvWrap>
+              <AdvList />
+            </S.AdvWrap>
+          </>
+        ) : (
+          <UDText
+            title={'ГОСТЕВАЯ КНИГА ПУСТА'}
+            weight={700}
+            size={32}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
+          />
+        )}
+      </S.BodyWrap>
 
-        <Footer />
-      </S.Container>
-    );
-  } else {
-    return (
-      <UDText
-        title={'ГОСТЕВАЯ КНИГА ПУСТА'}
-        weight={700}
-        size={32}
-        style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
-      />
-    );
-  }
+      <Footer />
+    </S.Container>
+  );
 }
 
 export default observer(GuestPage);

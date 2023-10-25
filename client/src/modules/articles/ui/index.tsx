@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import articlesStore from '@src/modules/articles/store';
 import { observer } from 'mobx-react-lite';
 import Footer from '@src/modules/home/ui/components/footer';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import AdvList from '@src/modules/adv/ui';
 
 function ArticlesPage() {
-  const { articles, getIntroArticles, getFullArticle } = articlesStore;
+  const { articles, getIntroArticles } = articlesStore;
 
   const navigation = useNavigate();
 
@@ -20,7 +20,7 @@ function ArticlesPage() {
     navigation(`/articles/${id}`);
   };
 
-  const ArticlesList = useCallback(() => {
+  const ArticlesList = () => {
     if (articles) {
       return (
         <S.ArticlesListWrap>
@@ -51,7 +51,7 @@ function ArticlesPage() {
         />
       );
     }
-  }, [articles]);
+  };
 
   return (
     <S.Container>

@@ -28,7 +28,10 @@ function App() {
     if (activeBtn) {
       changeActiveBtn(activeBtn);
     }
-    await auth();
+    const token = await localStorage.getItem('token');
+    if (token) {
+      await auth();
+    }
   };
 
   return (

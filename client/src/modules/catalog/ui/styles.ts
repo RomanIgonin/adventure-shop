@@ -5,13 +5,18 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
+export const BodyWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
 export const CatalogWrap = styled.div`
   display: flex;
   width: 62%;
   flex-wrap: wrap;
   min-height: 1102px;
   margin: 60px 0;
-  align-self: center;
 `;
 
 export const CatalogItem = styled.div`
@@ -25,8 +30,13 @@ export const CatalogItem = styled.div`
 export const Image = styled.img`
   height: 350px;
   object-fit: contain;
+  border-radius: 10px;
 `;
 
 export const TextWrap = styled.div`
   padding: 16px 34px;
+`;
+
+export const AdvWrap = styled.div`
+  margin: 60px 0;
 `;

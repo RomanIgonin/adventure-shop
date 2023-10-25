@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "eslintConfig": {
