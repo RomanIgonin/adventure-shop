@@ -1,4 +1,4 @@
 export interface Adv {
-  id: string;
+  id: number;
   html: string;
 }

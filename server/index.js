@@ -6,15 +6,19 @@ import util from 'util';
 import authRouter from "./routes/auth.js";
 import articlesRouter from "./routes/articles.js";
 import advRouter from "./routes/adv.js";
+import guestsRouter from "./routes/guests.js";
+import catalogRouter from "./routes/catalog.js";
 
 const app = express();
 const PORT = config.get("serverPort");
+const HOST = config.get("host");
+const USER = config.get("user");
+const PASSWORD = config.get("password");
 
-// todo Наверное нужно спрятать эти данные
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Slipknot300896",
+  host: HOST,
+  user: USER,
+  password: PASSWORD,
   database: "data",
 });
 
@@ -22,14 +26,15 @@ export const query = util.promisify(db.query).bind(db);
 
 app.use(express.json());
 app.use(cors());
-app.use("/auth", authRouter);
-app.use("/articles", articlesRouter);
-app.use("/adv", advRouter);
 
-// todo Добавь несуществующий роут
 app.get("/", (req, res) => {
   res.json("HELLO");
 });
+app.use("/auth", authRouter);
+app.use("/articles", articlesRouter);
+app.use("/adv", advRouter);
+app.use("/guests", guestsRouter);
+app.use("/catalog", catalogRouter);
 
 const start = async () => {
   try {

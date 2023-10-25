@@ -11,12 +11,22 @@ interface Props {
   placeholder: string;
   validation: RegisterOptions;
   errMessage: any;
+  multiline?: boolean;
   color?: ColorType;
   style?: React.CSSProperties;
 }
 
 const UDInput = (props: Props) => {
-  const { name, type, placeholder, validation, errMessage, color = 'dark', style = {} } = props;
+  const {
+    name,
+    type,
+    placeholder,
+    validation,
+    errMessage,
+    multiline = false,
+    color = 'dark',
+    style = {},
+  } = props;
 
   const { register } = useFormContext();
 
@@ -27,14 +37,24 @@ const UDInput = (props: Props) => {
           <UDText title={errMessage} size={16} color={'red'} />
         </S.Error>
       )}
-      <S.Input
-        id={name}
-        type={type}
-        placeholder={placeholder}
-        color={color}
-        style={style}
-        {...register(name, validation)}
-      />
+      {multiline ? (
+        <S.TextArea
+          id={name}
+          placeholder={placeholder}
+          color={color}
+          style={style}
+          {...register(name, validation)}
+        />
+      ) : (
+        <S.Input
+          id={name}
+          type={type}
+          placeholder={placeholder}
+          color={color}
+          style={style}
+          {...register(name, validation)}
+        />
+      )}
       <style>
         {`
           ::placeholder { 

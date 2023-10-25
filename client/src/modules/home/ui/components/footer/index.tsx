@@ -1,11 +1,8 @@
 import React from 'react';
 import * as S from '@src/modules/home/ui/components/footer/styles';
-import { useNavigate } from 'react-router-dom';
 import UDText from '@src/modules/ud-ui/ud-text';
 
 export const Footer = () => {
-  const navigation = useNavigate();
-
   return (
     <S.FooterWrap>
       <S.DividerTop />
