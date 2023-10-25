@@ -1,4 +1,7 @@
 {
   "serverPort": 8800,
-  "secretKey": "key-19.4rcOw94,2-1eqscCKDsA"
+  "secretKey": "key-19.4rcOw94,2-1eqscCKDsA",
+  "host": "localhost",
+  "user": "root",
+  "password": "Slipknot300896"
 }
