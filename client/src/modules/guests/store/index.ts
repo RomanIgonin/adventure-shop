@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Guest } from '@src/modules/guests/domain/interfaces/Guest';
 import { GuestData } from '@src/modules/guests/domain/interfaces/GuestData';
 
-const API_URL = 'http://localhost:8800/';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'guests';
 
 class GuestsStore {

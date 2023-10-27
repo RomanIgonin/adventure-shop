@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import { CatalogItem } from '@src/modules/catalog/domain/interfaces/CatalogItem';
 
-const API_URL = 'http://localhost:8800/';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'catalog';
 
 class CatalogStore {

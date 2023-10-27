@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Adv } from '@src/modules/adv/domain/interfaces/Adv';
 import { CatalogAdv } from '@src/modules/adv/domain/interfaces/CatalogAdv';
 
-const API_URL = 'http://localhost:8800/';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'adv';
 
 class AdvStore {

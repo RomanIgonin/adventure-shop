@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AuthData } from '@src/modules/auth/domain/interfaces/AuthData';
 
-const API_URL = 'http://localhost:8800/';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'auth';
 
 export const postRegistration = async (data: AuthData) => {

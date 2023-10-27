@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { Article } from '@src/modules/articles/domain/interfaces/Article';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8800/';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'articles';
 
 class ArticlesStore {
