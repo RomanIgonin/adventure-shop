@@ -8,7 +8,7 @@ export const BodyWrap = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 60px 12%;
-  min-height: 1102px;
+  min-height: 982px;
 `;
 
 export const GuestsList = styled.div`

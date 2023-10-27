@@ -47,7 +47,7 @@ function ArticlesPage() {
           title={'СТАТЕЙ НЕТ'}
           weight={700}
           size={32}
-          style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 200, width: '76%' }}
         />
       );
     }

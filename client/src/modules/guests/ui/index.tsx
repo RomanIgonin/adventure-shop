@@ -16,9 +16,9 @@ function GuestPage() {
 
   return (
     <S.Container>
-      <S.BodyWrap>
+      <div style={{ minHeight: 902 }}>
         {guests ? (
-          <>
+          <S.BodyWrap>
             <AddGuestForm />
 
             <S.GuestsList>
@@ -35,7 +35,7 @@ function GuestPage() {
             <S.AdvWrap>
               <AdvList />
             </S.AdvWrap>
-          </>
+          </S.BodyWrap>
         ) : (
           <UDText
             title={'ГОСТЕВАЯ КНИГА ПУСТА'}
@@ -44,7 +44,7 @@ function GuestPage() {
             style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
           />
         )}
-      </S.BodyWrap>
+      </div>
 
       <Footer />
     </S.Container>
