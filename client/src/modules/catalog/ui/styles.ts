@@ -9,13 +9,13 @@ export const BodyWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-height: 1102px;
 `;
 
 export const CatalogWrap = styled.div`
   display: flex;
   width: 62%;
   flex-wrap: wrap;
-  min-height: 1102px;
   margin: 60px 0;
 `;
 

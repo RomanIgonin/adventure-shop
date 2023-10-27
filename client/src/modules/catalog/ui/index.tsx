@@ -38,47 +38,49 @@ function CatalogPage() {
 
   return (
     <S.Container>
-      {catalogSection ? (
-        <S.BodyWrap>
-          <S.CatalogWrap>
-            {catalogSection.map(item => {
-              return (
-                <S.CatalogItem key={item.id}>
-                  <S.Image src={item.imageUrl} alt={item.name} />
-                  <S.TextWrap>
-                    <UDText title={String(item.price + ' руб')} weight={700} />
-                    <UDText title={item.name} style={{ marginTop: 8 }} />
-                  </S.TextWrap>
-                </S.CatalogItem>
-              );
-            })}
-          </S.CatalogWrap>
-
-          {catalogSection.length > 3 && catalogAdv && (
-            <S.AdvWrap>
-              {catalogAdv.map((item, index) => {
-                if (catalogSection.length % 4 >= index)
-                  return (
-                    <S.CatalogItem key={item.id}>
-                      <S.Image src={item.imageUrl} alt={item.title} />
-                      <S.TextWrap>
-                        <UDText title={item.title} weight={700} />
-                        <UDText title={item.desc} style={{ marginTop: 8 }} />
-                      </S.TextWrap>
-                    </S.CatalogItem>
-                  );
+      <S.BodyWrap>
+        {catalogSection ? (
+          <>
+            <S.CatalogWrap>
+              {catalogSection.map(item => {
+                return (
+                  <S.CatalogItem key={item.id}>
+                    <S.Image src={item.imageUrl} alt={item.name} />
+                    <S.TextWrap>
+                      <UDText title={String(item.price + ' руб')} weight={700} />
+                      <UDText title={item.name} style={{ marginTop: 8 }} />
+                    </S.TextWrap>
+                  </S.CatalogItem>
+                );
               })}
-            </S.AdvWrap>
-          )}
-        </S.BodyWrap>
-      ) : (
-        <UDText
-          title={'ТОВАРЫ ОТСУТСТВУЮТ'}
-          weight={700}
-          size={32}
-          style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
-        />
-      )}
+            </S.CatalogWrap>
+
+            {catalogSection.length > 3 && catalogAdv && (
+              <S.AdvWrap>
+                {catalogAdv.map((item, index) => {
+                  if (catalogSection.length % 4 >= index)
+                    return (
+                      <S.CatalogItem key={item.id}>
+                        <S.Image src={item.imageUrl} alt={item.title} />
+                        <S.TextWrap>
+                          <UDText title={item.title} weight={700} />
+                          <UDText title={item.desc} style={{ marginTop: 8 }} />
+                        </S.TextWrap>
+                      </S.CatalogItem>
+                    );
+                })}
+              </S.AdvWrap>
+            )}
+          </>
+        ) : (
+          <UDText
+            title={'ТОВАРЫ ОТСУТСТВУЮТ'}
+            weight={700}
+            size={32}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}
+          />
+        )}
+      </S.BodyWrap>
 
       <Footer />
     </S.Container>
