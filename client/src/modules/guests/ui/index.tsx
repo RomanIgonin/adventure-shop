@@ -8,7 +8,7 @@ import AddGuestForm from '@src/modules/guests/ui/components/addGuestForm';
 import { observer } from 'mobx-react-lite';
 
 function GuestPage() {
-  const { guests, getGuests } = guestsStore;
+  const { guests, getGuests, isLoading } = guestsStore;
 
   useEffect(() => {
     getGuests();
@@ -38,7 +38,7 @@ function GuestPage() {
           </S.BodyWrap>
         ) : (
           <UDText
-            title={'ГОСТЕВАЯ КНИГА ПУСТА'}
+            title={isLoading ? 'ОЖИДАЙТЕ' : 'ГОСТЕВАЯ КНИГА ПУСТА'}
             weight={700}
             size={32}
             style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}

@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import advStore from '@src/modules/adv/store';
 
 function CatalogPage() {
-  const { catalog, getCatalog } = catalogStore;
+  const { catalog, getCatalog, isLoading } = catalogStore;
   const { activeBtn } = navBarStore;
   const { catalogAdv, getCatalogAdv } = advStore;
 
@@ -74,7 +74,7 @@ function CatalogPage() {
           </>
         ) : (
           <UDText
-            title={'ТОВАРЫ ОТСУТСТВУЮТ'}
+            title={isLoading ? 'ОЖИДАЙТЕ' : 'ТОВАРЫ ОТСУТСТВУЮТ'}
             weight={700}
             size={32}
             style={{ display: 'flex', justifyContent: 'center', marginTop: 200 }}

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import AdvList from '@src/modules/adv/ui';
 
 function ArticlesPage() {
-  const { articles, getIntroArticles } = articlesStore;
+  const { articles, getIntroArticles, isLoading } = articlesStore;
 
   const navigation = useNavigate();
 
@@ -44,7 +44,7 @@ function ArticlesPage() {
     } else {
       return (
         <UDText
-          title={'СТАТЕЙ НЕТ'}
+          title={isLoading ? 'ОЖИДАЙТЕ' : 'СТАТЕЙ НЕТ'}
           weight={700}
           size={32}
           style={{ display: 'flex', justifyContent: 'center', marginTop: 200, width: '76%' }}
