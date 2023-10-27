@@ -10,7 +10,7 @@ import guestsRouter from "./routes/guests.js";
 import catalogRouter from "./routes/catalog.js";
 
 const app = express();
-const PORT = config.get("serverPort");
+const PORT = process.env.PORT || config.get("serverPort");
 const HOST = config.get("host");
 const USER = config.get("user");
 const PASSWORD = config.get("password");
@@ -19,7 +19,8 @@ const db = mysql.createConnection({
   host: HOST,
   user: USER,
   password: PASSWORD,
-  database: "data",
+  database: "sql8657134",
+  port: 3306
 });
 
 export const query = util.promisify(db.query).bind(db);
