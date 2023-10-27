@@ -3,7 +3,6 @@ import { query } from "../index.js";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
-import config from "config";
 
 const authRouter = new Router();
 
@@ -90,7 +89,7 @@ authRouter.post(
           return res.status(400).json({message: 'User not found'});
         }
 
-        const token = jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: '1h'});
+        const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '1h'});
         return res.json({
           token,
           user: {
@@ -115,7 +114,7 @@ authRouter.get("/", async (req, res) => {
         if (!token) {
           return res.status(401).json({ message: 'Auth error. Token in incorrect.' });
         }
-        const decodedToken = jwt.verify(token, config.get('secretKey'));
+        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decodedToken;
       }
 
@@ -128,7 +127,7 @@ authRouter.get("/", async (req, res) => {
         const isUserExist = data.length > 0;
         const user = isUserExist && data[0];
 
-        const token = await jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: '1h'});
+        const token = await jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '1h'});
         return res.json({
           token,
           user: {

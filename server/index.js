@@ -1,5 +1,4 @@
 import express from "express";
-import config from "config";
 import mysql from "mysql2";
 import cors from "cors";
 import util from 'util';
@@ -10,17 +9,19 @@ import guestsRouter from "./routes/guests.js";
 import catalogRouter from "./routes/catalog.js";
 
 const app = express();
-const PORT = process.env.PORT || config.get("serverPort");
-const HOST = config.get("host");
-const USER = config.get("user");
-const PASSWORD = config.get("password");
+const SERVER_PORT = process.env.SERVER_PORT
+const HOST = process.env.HOST;
+const USER = process.env.DB_USER;
+const PASSWORD = process.env.PASSWORD;
+const DATABASE = process.env.DATABASE;
+const DATABASE_PORT = process.env.DATABASE_PORT;
 
 const db = mysql.createConnection({
   host: HOST,
   user: USER,
   password: PASSWORD,
-  database: "sql8657134",
-  port: 3306
+  database: DATABASE,
+  port: DATABASE_PORT
 });
 
 export const query = util.promisify(db.query).bind(db);
@@ -39,8 +40,8 @@ app.use("/catalog", catalogRouter);
 
 const start = async () => {
   try {
-    app.listen(PORT, () => {
-      console.log("Server started on port", PORT);
+    app.listen(SERVER_PORT, () => {
+      console.log("Server started on port", SERVER_PORT);
     });
   } catch (error) {
     console.log("error", error);
