@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: row;
   height: 142px;
   align-items: center;
-  margin: 0 200px;
+  margin: 0 8%;
   justify-content: space-between;
 `;
 

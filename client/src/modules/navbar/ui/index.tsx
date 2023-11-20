@@ -33,28 +33,28 @@ function Navbar() {
             color={'light'}
             isActive={activeBtn === 'ОБУВЬ'}
             onClick={() => onClickBtn('ОБУВЬ', '/catalog')}
-            style={{ marginLeft: 50 }}
+            style={{ marginLeft: '4%' }}
           />
           <UDNavButton
             title={'ПАЛАТКИ'}
             color={'light'}
             isActive={activeBtn === 'ПАЛАТКИ'}
             onClick={() => onClickBtn('ПАЛАТКИ', '/catalog')}
-            style={{ marginLeft: 50 }}
+            style={{ marginLeft: '4%' }}
           />
           <UDNavButton
             title={'СПАЛЬНИКИ'}
             color={'light'}
             isActive={activeBtn === 'СПАЛЬНИКИ'}
             onClick={() => onClickBtn('СПАЛЬНИКИ', '/catalog')}
-            style={{ marginLeft: 50 }}
+            style={{ marginLeft: '4%' }}
           />
           <UDNavButton
             title={'РЮКЗАКИ'}
             color={'light'}
             isActive={activeBtn === 'РЮКЗАКИ'}
             onClick={() => onClickBtn('РЮКЗАКИ', '/catalog')}
-            style={{ marginLeft: 50 }}
+            style={{ marginLeft: '4%' }}
           />
         </S.NavbarLeft>
         <S.NavbarRight>
@@ -69,7 +69,7 @@ function Navbar() {
             color={'light'}
             isActive={activeBtn === 'ГОСТЕВАЯ КНИГА'}
             onClick={() => onClickBtn('ГОСТЕВАЯ КНИГА', '/guests')}
-            style={{ marginLeft: 50 }}
+            style={{ marginLeft: '12%' }}
           />
         </S.NavbarRight>
       </S.NavbarWrap>

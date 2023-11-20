@@ -8,15 +8,17 @@ export const NavbarWrap = styled.div`
   justify-content: space-between;
   height: 54px;
   background-color: #303030;
-  padding: 0 200px;
+  padding: 0 8%;
 `;
 
 export const NavbarLeft = styled.div`
   display: flex;
   flex-direction: row;
+  width: 60%;
 `;
 
 export const NavbarRight = styled.div`
   display: flex;
   flex-direction: row;
+  width: 18%;
 `;

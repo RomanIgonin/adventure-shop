@@ -55,19 +55,18 @@ function CatalogPage() {
               })}
             </S.CatalogWrap>
 
-            {catalogSection.length > 3 && catalogAdv && (
+            {catalogAdv && (
               <S.AdvWrap>
-                {catalogAdv.map((item, index) => {
-                  if (catalogSection.length % 4 >= index)
-                    return (
-                      <S.CatalogItem key={item.id}>
-                        <S.Image src={item.imageUrl} alt={item.title} />
-                        <S.TextWrap>
-                          <UDText title={item.title} weight={700} />
-                          <UDText title={item.desc} style={{ marginTop: 8 }} />
-                        </S.TextWrap>
-                      </S.CatalogItem>
-                    );
+                {catalogAdv.map(item => {
+                  return (
+                    <S.CatalogItem key={item.id}>
+                      <S.Image src={item.imageUrl} alt={item.title} />
+                      <S.TextWrap>
+                        <UDText title={item.title} weight={700} />
+                        <UDText title={item.desc} style={{ marginTop: 8 }} />
+                      </S.TextWrap>
+                    </S.CatalogItem>
+                  );
                 })}
               </S.AdvWrap>
             )}

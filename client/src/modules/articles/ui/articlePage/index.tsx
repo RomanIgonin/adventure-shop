@@ -29,7 +29,7 @@ function ArticlePage() {
           key={`p_${i}`}
           title={str}
           size={20}
-          style={{ marginTop: 20, paddingLeft: 120, paddingRight: 120 }}
+          style={{ marginTop: 20, paddingLeft: '10%', paddingRight: '10%' }}
         />
       );
     });
@@ -51,12 +51,12 @@ function ArticlePage() {
               title={title}
               weight={700}
               size={24}
-              style={{ paddingLeft: 120, paddingRight: 120 }}
+              style={{ paddingLeft: '10%', paddingRight: '10%' }}
             />
             <S.IntroText
               title={introText}
               size={20}
-              style={{ marginTop: 10, paddingLeft: 120, paddingRight: 120 }}
+              style={{ marginTop: 10, paddingLeft: '10%', paddingRight: '10%' }}
             />
             {fullImageUrl && <S.ArticleImg src={fullImageUrl} alt={article.title} />}
             <S.TextWrap>{fullText && getFormattedText(fullText)}</S.TextWrap>

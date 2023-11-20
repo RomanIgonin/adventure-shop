@@ -8,7 +8,7 @@ export const BodyWrap = styled.div`
   flex-direction: row;
   justify-content: space-between;
   min-height: 1102px;
-  margin: 60px 200px 60px 200px;
+  margin: 60px 8% 60px 8%;
 `;
 
 export const GoBack = styled.button`
@@ -26,7 +26,7 @@ export const ArticleWrap = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  max-width: 58%;
+  max-width: 62%;
   align-items: center;
 `;
 

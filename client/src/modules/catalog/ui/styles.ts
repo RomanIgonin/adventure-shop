@@ -16,7 +16,7 @@ export const CatalogWrap = styled.div`
   display: flex;
   width: 62%;
   flex-wrap: wrap;
-  margin: 60px 0;
+  margin: 60px 0 60px 8%;
 `;
 
 export const CatalogItem = styled.div`
@@ -38,5 +38,5 @@ export const TextWrap = styled.div`
 `;
 
 export const AdvWrap = styled.div`
-  margin: 60px 0;
+  margin: 60px 8% 60px 0;
 `;

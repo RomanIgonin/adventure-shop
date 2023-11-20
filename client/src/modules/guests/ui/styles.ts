@@ -7,7 +7,7 @@ export const BodyWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 60px 12%;
+  margin: 60px 8%;
   min-height: 982px;
 `;
 
@@ -29,5 +29,5 @@ export const GuestComment = styled(UDText)``;
 
 export const AdvWrap = styled.div`
   width: 18%;
-  margin-left: 6%;
+  margin-left: 4%;
 `;

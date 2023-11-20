@@ -6,15 +6,14 @@ export const Container = styled.div``;
 export const ArticlesListWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 76%;
 `;
 
 export const ArticlesWrap = styled.div`
   display: flex;
   flex-direction: row;
   min-height: 1102px;
-  margin-left: 20%;
-  margin-right: 12%;
+  margin-left: 8%;
+  margin-right: 8%;
   margin-bottom: 60px;
 `;
 
@@ -27,6 +26,8 @@ export const ArticleWrap = styled.div`
 
 export const ArticleImg = styled.img`
   border-radius: 10px;
+  width: 300px;
+  height: 200px;
 `;
 
 export const TextWrap = styled.div`
@@ -50,7 +51,7 @@ export const Date = styled(UDText)``;
 
 export const ReadMore = styled.div`
   position: absolute;
-  bottom: 16px;
+  bottom: 0px;
   right: 32px;
 `;
 
