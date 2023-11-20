@@ -1,15 +1,18 @@
 import styled from 'styled-components';
+import authBg from '../../../assets/img/auth-bg.jpg';
 
-export const Container = styled.form``;
-
-export const ImageWrap = styled.div`
+export const Container = styled.div`
   display: flex;
-  position: relative;
+  background-image: url(${authBg});
+  width: 100vw;
+  height: 85vh;
+  background-position: center;
+  background-size: cover;
   justify-content: center;
+  align-items: center;
 `;
 
-export const FormWrap = styled.div`
-  position: absolute;
+export const AuthForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

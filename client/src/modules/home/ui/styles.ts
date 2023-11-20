@@ -7,11 +7,13 @@ export const ImageWrap = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 85vh;
 `;
 
 export const ImageBg = styled.img`
   width: 100%;
-  height: 752px;
+  height: 100%;
   object-fit: cover;
 `;
 

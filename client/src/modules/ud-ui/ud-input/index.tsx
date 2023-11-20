@@ -11,6 +11,7 @@ interface Props {
   placeholder: string;
   validation: RegisterOptions;
   errMessage: any;
+  isPassOpen?: boolean;
   multiline?: boolean;
   color?: ColorType;
   style?: React.CSSProperties;
@@ -23,6 +24,7 @@ const UDInput = (props: Props) => {
     placeholder,
     validation,
     errMessage,
+    isPassOpen = false,
     multiline = false,
     color = 'dark',
     style = {},
@@ -48,7 +50,7 @@ const UDInput = (props: Props) => {
       ) : (
         <S.Input
           id={name}
-          type={type}
+          type={isPassOpen ? 'text' : type}
           placeholder={placeholder}
           color={color}
           style={style}

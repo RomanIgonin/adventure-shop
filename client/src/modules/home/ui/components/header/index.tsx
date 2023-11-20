@@ -47,7 +47,7 @@ const Header = (props: Props) => {
       </S.HomeWrap>
 
       <S.LogoWrap>
-        <img src={require('@img/logo.png')} width={450} height={90} alt={'logo'} />
+        <img src={require('@img/logo.png')} width={'20%'} height={'4%'} alt={'logo'} />
       </S.LogoWrap>
 
       <S.LoginWrap>
