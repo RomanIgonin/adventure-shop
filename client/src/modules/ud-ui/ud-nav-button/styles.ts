@@ -12,7 +12,7 @@ interface Props {
 }
 export const Button = styled.button<Props>`
   font-family: 'Ubuntu', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   border-width: 0;
   background-color: rgba(255, 255, 255, 0);

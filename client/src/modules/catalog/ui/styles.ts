@@ -15,6 +15,7 @@ export const BodyWrap = styled.div`
 export const CatalogWrap = styled.div`
   display: flex;
   width: 62%;
+  height: 100%;
   flex-wrap: wrap;
   margin: 60px 0 60px 8%;
 `;

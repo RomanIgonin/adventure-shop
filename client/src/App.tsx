@@ -11,7 +11,8 @@ import AuthPage from '@src/modules/auth/ui';
 import authStore from '@src/modules/auth/store';
 import navBarStore from '@src/modules/navbar/store';
 import UDText from '@src/modules/ud-ui/ud-text';
-import ArticlePage from '@src/modules/articles/ui/articlePage';
+import ArticlePage from 'src/modules/articles/ui/article-page';
+import ProductCardPage from '@src/modules/catalog/ui/product-card';
 
 function App() {
   const { auth } = authStore;
@@ -46,6 +47,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/catalog/:id" element={<ProductCardPage />} />
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:id" element={<ArticlePage />} />
             <Route path="/guests" element={<GuestPage />} />

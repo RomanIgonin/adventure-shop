@@ -6,11 +6,15 @@ import UDText from '@src/modules/ud-ui/ud-text';
 import navBarStore from '@src/modules/navbar/store';
 import { observer } from 'mobx-react-lite';
 import advStore from '@src/modules/adv/store';
+import { CatalogItem } from '@src/modules/catalog/domain/interfaces/CatalogItem';
+import { useNavigate } from 'react-router-dom';
 
 function CatalogPage() {
   const { catalog, getCatalog, isLoading } = catalogStore;
   const { activeBtn } = navBarStore;
   const { catalogAdv, getCatalogAdv } = advStore;
+
+  const navigation = useNavigate();
 
   const catalogType = useMemo(
     () =>
@@ -36,6 +40,10 @@ function CatalogPage() {
     getCatalogAdv();
   }, []);
 
+  const onClickItem = (item: CatalogItem) => {
+    navigation(`/catalog/${item.id}`);
+  };
+
   return (
     <S.Container>
       <S.BodyWrap>
@@ -44,7 +52,7 @@ function CatalogPage() {
             <S.CatalogWrap>
               {catalogSection.map(item => {
                 return (
-                  <S.CatalogItem key={item.id}>
+                  <S.CatalogItem key={item.id} onClick={() => onClickItem(item)}>
                     <S.Image src={item.imageUrl} alt={item.name} />
                     <S.TextWrap>
                       <UDText title={String(item.price + ' руб')} weight={700} />

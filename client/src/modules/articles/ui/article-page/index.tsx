@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import articlesStore from '@src/modules/articles/store';
 import { observer } from 'mobx-react-lite';
 import Footer from '@src/modules/home/ui/components/footer';
-import * as S from '@src/modules/articles/ui/articlePage/styles';
+import * as S from '@src/modules/articles/ui/article-page/styles';
 import UDText from '@src/modules/ud-ui/ud-text';
 import { useNavigate, useParams } from 'react-router-dom';
 import AdvList from '@src/modules/adv/ui';

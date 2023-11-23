@@ -14,11 +14,9 @@ export const NavbarWrap = styled.div`
 export const NavbarLeft = styled.div`
   display: flex;
   flex-direction: row;
-  width: 60%;
 `;
 
 export const NavbarRight = styled.div`
   display: flex;
   flex-direction: row;
-  width: 18%;
 `;
