@@ -19,7 +19,7 @@ export const LogoWrap = styled.div`
   justify-content: center;
 `;
 
-export const LoginWrap = styled.div`
+export const RightContentWrap = styled.div`
   display: flex;
   position: relative;
 `;
@@ -36,6 +36,27 @@ export const Logout = styled.button`
   background-color: rgba(255, 255, 255, 0);
   position: absolute;
   top: 48px;
+`;
+
+export const IconCartWrap = styled.div`
+  display: flex;
+  margin: 0 30px 0 0;
+`;
+
+export const IconCart = styled.img`
+  align-self: center;
+`;
+
+export const CartCounter = styled.div`
+  display: flex;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #e63d3d;
+  border-radius: 12px;
+  left: 32px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const IconUser = styled.img`

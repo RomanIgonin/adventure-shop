@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
 
 export const ImageWrap = styled.div`
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 85vh;
+  height: 58vh;
 `;
 
 export const ImageBg = styled.img`

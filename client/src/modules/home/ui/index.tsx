@@ -7,7 +7,7 @@ function HomePage() {
     <S.Container>
       <S.ImageWrap>
         <S.Tagline src={require('@img/tagline.png')} alt={'tagline'} />
-        <S.ImageBg src={require('@img/home-bg.jpg')} alt={'header'} />
+        <S.ImageBg src={require('@img/home-bg.jpg')} alt={'home-bg'} />
       </S.ImageWrap>
 
       <Footer />

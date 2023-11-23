@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import navBarStore from '@src/modules/navbar/store';
 import authStore from '@src/modules/auth/store';
 import UDText from '@src/modules/ud-ui/ud-text';
+import cartStore from '@src/modules/cart/store';
 
 interface Props {
   onClickBtn: (btnName: string, route: string) => void;
@@ -12,15 +13,22 @@ interface Props {
 const Header = (props: Props) => {
   const { activeBtn } = navBarStore;
   const { session, logout } = authStore;
+  const { cart, removeAllCart } = cartStore;
 
   const { onClickBtn } = props;
+  const showCounter = cart && cart.length > 0;
+
+  const onClickLogout = async () => {
+    await logout();
+    await removeAllCart();
+  };
 
   const SessionBtn = () => {
     if (session) {
       return (
         <S.EmailWrap>
           <UDText title={session.user.email} weight={700} />
-          <S.Logout onClick={() => logout()}>
+          <S.Logout onClick={onClickLogout}>
             <UDText title={'ВЫХОД'} weight={700} size={14} style={{ color: '#DBAB3E' }} />
           </S.Logout>
         </S.EmailWrap>
@@ -36,6 +44,19 @@ const Header = (props: Props) => {
     }
   };
 
+  const IconCart = () => {
+    return (
+      <S.IconCartWrap onClick={() => onClickBtn('КОРЗИНА', '/cart')}>
+        <S.IconCart src={require('@img/icon-cart.png')} height={42} alt={'icon-cart'} />
+        {showCounter && (
+          <S.CartCounter>
+            <UDText title={String(cart.length)} weight={700} size={12} color={'light'} />
+          </S.CartCounter>
+        )}
+      </S.IconCartWrap>
+    );
+  };
+
   return (
     <S.Container>
       <S.HomeWrap>
@@ -47,13 +68,14 @@ const Header = (props: Props) => {
       </S.HomeWrap>
 
       <S.LogoWrap>
-        <img src={require('@img/logo.png')} width={'20%'} height={'4%'} alt={'logo'} />
+        <img src={require('@img/logo.png')} width={280} alt={'logo'} />
       </S.LogoWrap>
 
-      <S.LoginWrap>
+      <S.RightContentWrap>
+        <IconCart />
         <S.IconUser src={require('@img/icon-user.png')} height={42} alt={'icon-user'} />
         <SessionBtn />
-      </S.LoginWrap>
+      </S.RightContentWrap>
     </S.Container>
   );
 };

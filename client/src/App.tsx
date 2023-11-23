@@ -13,10 +13,13 @@ import navBarStore from '@src/modules/navbar/store';
 import UDText from '@src/modules/ud-ui/ud-text';
 import ArticlePage from 'src/modules/articles/ui/article-page';
 import ProductCardPage from '@src/modules/catalog/ui/product-card';
+import CartPage from '@src/modules/cart/ui';
+import cartStore from '@src/modules/cart/store';
 
 function App() {
   const { auth } = authStore;
   const { changeActiveBtn } = navBarStore;
+  const { getCartProducts } = cartStore;
 
   const errTitle = 'ЗАПРАШИВАЕМОЙ СТРАНИЦЫ НЕ СУЩЕСТВУЕТ';
 
@@ -32,6 +35,7 @@ function App() {
     const token = await localStorage.getItem('token');
     if (token) {
       await auth();
+      await getCartProducts();
     }
   };
 
@@ -45,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navbar />}>
             <Route index element={<HomePage />} />
+            <Route path="/cart" element={<CartPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:id" element={<ProductCardPage />} />

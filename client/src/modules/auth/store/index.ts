@@ -21,7 +21,7 @@ class AuthStore {
   login = async (data: AuthData) => {
     this.setLoading(true);
     const res = await postLogin(data);
-    if (res.data) {
+    if (res.status === 200) {
       this.setSession(res.data);
     }
     this.setLoading(false);

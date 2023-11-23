@@ -69,7 +69,7 @@ function Navbar() {
             color={'light'}
             isActive={activeBtn === 'ГОСТЕВАЯ КНИГА'}
             onClick={() => onClickBtn('ГОСТЕВАЯ КНИГА', '/guests')}
-            style={{ marginLeft: '12%' }}
+            style={{ marginLeft: '10%', width: 110 }}
           />
         </S.NavbarRight>
       </S.NavbarWrap>

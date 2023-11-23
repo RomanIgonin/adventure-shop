@@ -13,9 +13,11 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import navBarStore from '@src/modules/navbar/store';
 import UDLoader from '@src/modules/ud-ui/ud-loader';
+import cartStore from '@src/modules/cart/store';
 
 function AuthPage() {
   const { registration, login, isLoading } = authStore;
+  const { getCartProducts } = cartStore;
   const [isLoginForm, setLoginForm] = useState<boolean>(true);
   const [isPassOpen, setPassOpen] = useState<boolean>(false);
 
@@ -43,6 +45,7 @@ function AuthPage() {
       if (isLoginForm) {
         goHome();
         changeActiveBtn('ГЛАВНАЯ');
+        await getCartProducts();
       } else setLoginForm(true);
       reset();
     }
@@ -137,7 +140,7 @@ function AuthPage() {
 
               <UDButton title={buttonTitle} onClick={onSubmit} style={{ marginTop: 28 }} />
 
-              <S.Link onClick={() => onClickLink()}>
+              <S.Link onClick={onClickLink}>
                 <UDText
                   title={linkTitle}
                   weight={300}

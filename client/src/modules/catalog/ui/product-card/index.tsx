@@ -6,9 +6,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import catalogStore from '@src/modules/catalog/store';
 import UDText from '@src/modules/ud-ui/ud-text';
 import UDButton from '@src/modules/ud-ui/ud-button';
+import authStore from '@src/modules/auth/store';
+import cartStore from '@src/modules/cart/store';
 
 function ProductCardPage() {
   const { catalog } = catalogStore;
+  const { session } = authStore;
+  const { putCartProduct } = cartStore;
 
   const { id } = useParams();
   const navigation = useNavigate();
@@ -35,13 +39,19 @@ function ProductCardPage() {
     );
   };
 
-  const onClickAddToCart = () => {
-    console.log('q');
-  };
-
   const Product = () => {
     if (product) {
       const { id, desc, name, imageUrl, price } = product;
+
+      const onClickAddToCart = async () => {
+        if (session) {
+          const userId = session?.user.id;
+          await putCartProduct({ userId, productId: id, name, imageUrl, price });
+        } else {
+          alert('Что бы добавить товар в корзину необходимо авторизоваться');
+        }
+      };
+
       return (
         <S.ProductWrap>
           <S.TopContent>
