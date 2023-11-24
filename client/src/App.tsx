@@ -15,11 +15,14 @@ import ArticlePage from 'src/modules/articles/ui/article-page';
 import ProductCardPage from '@src/modules/catalog/ui/product-card';
 import CartPage from '@src/modules/cart/ui';
 import cartStore from '@src/modules/cart/store';
+import FaqPage from '@src/modules/faq/ui';
+import faqStore from '@src/modules/faq/store';
 
 function App() {
   const { auth } = authStore;
   const { changeActiveBtn } = navBarStore;
   const { getCartProducts } = cartStore;
+  const { getFaq } = faqStore;
 
   const errTitle = 'ЗАПРАШИВАЕМОЙ СТРАНИЦЫ НЕ СУЩЕСТВУЕТ';
 
@@ -37,6 +40,7 @@ function App() {
       await auth();
       await getCartProducts();
     }
+    await getFaq();
   };
 
   return (
@@ -56,6 +60,7 @@ function App() {
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:id" element={<ArticlePage />} />
             <Route path="/guests" element={<GuestPage />} />
+            <Route path="/faq/:id" element={<FaqPage />} />
           </Route>
           <Route
             path="*"

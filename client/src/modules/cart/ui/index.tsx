@@ -4,16 +4,16 @@ import Footer from '@src/modules/home/ui/components/footer';
 import UDText from '@src/modules/ud-ui/ud-text';
 import UDButton from '@src/modules/ud-ui/ud-button';
 import cartStore from '@src/modules/cart/store';
-import { CartProduct } from '@src/modules/cart/domain/interfaces/CartProduct';
 import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
 
 function CartPage() {
   const { cart, removeCartProduct, totalCost, removeAllCart } = cartStore;
   const [isOrderCreate, setOrderCreate] = useState(false);
+  const navigation = useNavigate();
 
-  const onClickProduct = (item: CartProduct) => {
-    // todo: Доделать
-    console.log('onClickProduct');
+  const onClickProduct = (itemId: number) => {
+    navigation(`/catalog/${itemId}`);
   };
 
   const onClickRemove = async (id: number) => {
@@ -21,11 +21,11 @@ function CartPage() {
   };
 
   const onSubmit = async () => {
-    await removeAllCart();
     setOrderCreate(true);
     setTimeout(() => {
       setOrderCreate(false);
     }, 2000);
+    await removeAllCart();
   };
 
   const ErrorInfo = () => {
@@ -49,7 +49,7 @@ function CartPage() {
                 <S.ProductsItem key={item.id}>
                   <div
                     style={{ display: 'flex', flexDirection: 'row' }}
-                    onClick={() => onClickProduct(item)}>
+                    onClick={() => onClickProduct(item.productId)}>
                     <S.Image src={item.imageUrl} alt={item.name} />
                     <S.TextWrap>
                       <UDText title={item.name} />

@@ -21,11 +21,10 @@ export const LeftList = styled.div`
   flex-direction: row;
 `;
 
-export const FirstCol = styled.div`
-  margin-left: 120px;
-`;
-
-export const SecondCol = styled.div`
+export const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-left: 120px;
 `;
 
@@ -37,6 +36,11 @@ export const IconVk = styled.img`
   margin-top: 26px;
   height: 32px;
   width: 32px;
+`;
+
+export const Button = styled.button`
+  background-color: rgba(255, 255, 255, 0);
+  border-width: 0;
 `;
 
 export const DividerBottom = styled.div`
