@@ -8,6 +8,7 @@ import advRouter from "./routes/adv.js";
 import guestsRouter from "./routes/guests.js";
 import catalogRouter from "./routes/catalog.js";
 import cartRouter from "./routes/cart.js";
+import faqRouter from "./routes/faq.js";
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT
@@ -39,6 +40,7 @@ app.use("/adv", advRouter);
 app.use("/guests", guestsRouter);
 app.use("/catalog", catalogRouter);
 app.use("/cart", cartRouter);
+app.use("/faq", faqRouter);
 
 const start = async () => {
   try {
