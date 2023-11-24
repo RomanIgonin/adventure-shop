@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CartProduct } from '@src/modules/cart/domain/interfaces/CartProduct';
 import authStore from '@src/modules/auth/store';
 
-const API_URL = 'process.env.REACT_APP_API_URL';
+const API_URL = process.env.REACT_APP_API_URL;
 const PREFIX = 'cart';
 
 class CartStore {
