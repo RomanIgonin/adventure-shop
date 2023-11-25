@@ -6,5 +6,6 @@ export interface CatalogItem {
   imageUrl: string;
   name: string;
   price: number;
+  quantity: number;
   type: CatalogType;
 }

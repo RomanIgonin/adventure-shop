@@ -41,7 +41,7 @@ function ProductCardPage() {
 
   const Product = () => {
     if (product) {
-      const { id, desc, name, imageUrl, price } = product;
+      const { id, desc, name, imageUrl, price, quantity } = product;
 
       const onClickAddToCart = async () => {
         if (session) {
@@ -57,12 +57,13 @@ function ProductCardPage() {
           <S.TopContent>
             <S.LeftContent>
               <UDText title={name} weight={700} size={24} />
-              <UDText title={'Код товара: ' + id} style={{ marginTop: 14 }} />
+              <UDText title={`Код товара: ${id}`} style={{ marginTop: 14 }} />
               <S.Image src={imageUrl} alt={name} style={{ marginTop: 14 }} />
             </S.LeftContent>
 
             <S.RightContent>
-              <UDText title={price + 'руб'} weight={700} size={24} />
+              <UDText title={`${price} руб`} weight={700} size={24} />
+              <UDText title={`Осталось: ${quantity} штук`} style={{ marginTop: 14 }} />
               <UDButton
                 title={'Добавить в корзину'}
                 onClick={onClickAddToCart}
@@ -71,7 +72,7 @@ function ProductCardPage() {
             </S.RightContent>
           </S.TopContent>
 
-          <UDText title={'Описание: ' + desc} style={{ marginTop: 24 }} />
+          <UDText title={`Описание: ${desc}`} style={{ marginTop: 24 }} />
         </S.ProductWrap>
       );
     } else {
